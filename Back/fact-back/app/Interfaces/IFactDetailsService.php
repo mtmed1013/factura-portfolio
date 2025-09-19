@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Interfaces;
+
+interface IFactDetailsService
+{
+    public function GetAllByIdFact($factId);
+    public function GetAllByIdProduct($productId);
+    public function Create($data);
+    public function Delete($id);
+}

@@ -1,0 +1,5 @@
+:host ::ng-deep .p-inputnumber .form-control {
+  height: calc(2.5rem + 2px); // mismo alto que otros form-control
+  padding: 0.5rem 0.75rem; // mismo padding horizontal/vertical
+  line-height: 1.5; // igual que bootstrap
+}

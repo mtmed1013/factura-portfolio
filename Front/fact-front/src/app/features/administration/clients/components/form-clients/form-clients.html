@@ -1,0 +1,129 @@
+<p-dialog
+    [header]="title"
+    [modal]="true"
+    [(visible)]="visible"
+    [style]="{ width: '25rem' }"
+    (onHide)="closeModal()"
+>
+    @if(!loading){
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-label">Identification</label>
+                    <input
+                        pInputText
+                        class="form-control"
+                        placeholder="Identification"
+                        formControlName="identification"
+                    />
+                    @if(form.controls['identification'].invalid &&
+                    form.controls['identification'].touched) {
+                    <span class="ml-1 text-danger mt-2"
+                        >Identification is required.</span
+                    >
+                    }
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-label">First Name</label>
+                    <input
+                        pInputText
+                        class="form-control"
+                        placeholder="First Name"
+                        formControlName="first_name"
+                    />
+                    @if(form.controls['first_name'].invalid &&
+                    form.controls['first_name'].touched) {
+                    <span class="ml-1 text-danger mt-2"
+                        >First name is required.</span
+                    >
+                    }
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-label">Last Name</label>
+                    <input
+                        pInputText
+                        class="form-control"
+                        placeholder="Last Name"
+                        formControlName="last_name"
+                    />
+                    @if(form.controls['last_name'].invalid &&
+                    form.controls['last_name'].touched) {
+                    <span class="ml-1 text-danger mt-2"
+                        >Last name is required.</span
+                    >
+                    }
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input
+                        pInputText
+                        class="form-control"
+                        placeholder="Email"
+                        formControlName="email"
+                        type="email"
+                    />
+                    @if(form.controls['email'].invalid &&
+                    form.controls['email'].touched) {
+                    <span class="ml-1 text-danger mt-2"
+                        >Valid email is required.</span
+                    >
+                    }
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <p-inputMask
+                        mask="999-999-9999"
+                        slotChar="_"
+                        placeholder="Phone"
+                        formControlName="phone"
+                        [style]="{ width: '100%' }"
+                    ></p-inputMask>
+                    @if(form.controls['phone'].invalid &&
+                    form.controls['phone'].touched) {
+                    <span class="ml-1 text-danger mt-2"
+                        >Phone is required.</span
+                    >
+                    }
+                </div>
+            </div>
+            <div class="col-md-6 mt-4">
+                <button
+                    class="btn btn-icon btn-3 btn-secondary"
+                    type="button"
+                    (click)="closeModal()"
+                >
+                    <span class="btn-inner--icon"
+                        ><i class="pi pi-times"></i
+                    ></span>
+                    <span class="btn-inner--text">Cancel</span>
+                </button>
+            </div>
+            <div class="col-md-6 mt-4" align="right">
+                <button
+                    class="btn btn-icon btn-3 btn-primary"
+                    type="button"
+                    (click)="client ? handleEdit() : handleSave()"
+                >
+                    <span class="btn-inner--text">Save</span>
+                    <span class="btn-inner--icon"
+                        ><i class="pi pi-check"></i
+                    ></span>
+                </button>
+            </div>
+        </div>
+    </form>
+    } @else {
+    <p-skeleton height="2rem" class="mb-2" />
+    <p-skeleton height="2rem" class="mb-2" />
+    <p-skeleton height="2rem" class="mb-2" />
+    }
+</p-dialog>

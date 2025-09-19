@@ -1,0 +1,86 @@
+<p-dialog
+    [header]="title"
+    [modal]="true"
+    [(visible)]="visible"
+    [style]="{ width: '25rem' }"
+    (onHide)="closeModal()"
+>
+    @if(!loading){
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input
+                        pInputText
+                        class="form-control"
+                        placeholder="Name"
+                        formControlName="name"
+                    />
+                    @if(form.controls['name'].invalid &&
+                    form.controls['name'].touched) {
+                    <span class="ml-1 text-danger mt-2">Name is required.</span>
+                    }
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label class="form-label">Stock</label>
+                <input
+                    pInputText
+                    class="form-control"
+                    placeholder="Stock"
+                    formControlName="stock"
+                />
+                @if(form.controls['stock'].invalid &&
+                form.controls['stock'].touched) {
+                <span class="ml-1 text-danger mt-2">Stock is required.</span>
+                }
+            </div>
+            <div class="col-md-12 mt-2">
+                <label class="form-label">Price</label>
+                <p-inputNumber
+                    mode="currency"
+                    currency="USD"
+                    locale="en-US"
+                    inputStyleClass="form-control"
+                    placeholder="Price"
+                    formControlName="price"
+                    style="width: 100%"
+                ></p-inputNumber>
+                @if(form.controls['price'].invalid &&
+                form.controls['price'].touched) {
+                <span class="ml-1 text-danger mt-2">Price is required.</span>
+                }
+            </div>
+            <div class="col-md-6 mt-4">
+                <button
+                    class="btn btn-icon btn-3 btn-secondary"
+                    type="button"
+                    (click)="closeModal()"
+                >
+                    <span class="btn-inner--icon"
+                        ><i class="pi pi-times"></i
+                    ></span>
+                    <span class="btn-inner--text">Cancel</span>
+                </button>
+            </div>
+            <div class="col-md-6 mt-4" align="right">
+                <button
+                    class="btn btn-icon btn-3 btn-primary"
+                    type="button"
+                    (click)="product ? handleEdit() : handleSave()"
+                >
+                    <span class="btn-inner--text">Save</span>
+                    <span class="btn-inner--icon"
+                        ><i class="pi pi-check"></i
+                    ></span>
+                </button>
+            </div>
+        </div>
+    </form>
+    } @else {
+    <p-skeleton height="2rem" class="mb-2" />
+    <p-skeleton height="2rem" class="mb-2" />
+    <p-skeleton height="2rem" class="mb-2" />
+    }
+</p-dialog>
