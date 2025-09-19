@@ -1,59 +1,106 @@
-# FactFront
+# FactFront & FactBack
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
+Este proyecto está compuesto por dos partes:
 
-## Development server
+-   **fact-front**: Aplicación Angular (frontend)
+-   **fact-back**: API backend desarrollada en Laravel (no PHP tradicional)
 
-To start a local development server, run:
+## Requisitos previos
 
-```bash
-ng serve
-```
+-   Node.js y npm
+-   Angular CLI
+-   PHP >= 8.1
+-   Composer
+-   XAMPP (opcional, para Windows y Mac)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Instalación y ejecución de fact-front (Angular)
 
-## Code scaffolding
+1. Instala dependencias:
+    ```bash
+    cd Front/fact-front
+    npm install
+    ```
+2. Ejecuta el servidor de desarrollo:
+    ```bash
+    ng serve
+    ```
+3. Accede a la app en [http://localhost:4200/](http://localhost:4200/)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Instalación y ejecución de fact-back (Laravel)
 
-```bash
-ng generate component component-name
-```
+### En Windows (XAMPP)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1. Instala XAMPP y asegúrate de que Apache y MySQL estén corriendo.
+2. Clona el proyecto y ubica la carpeta `Back/fact-back` dentro de tu directorio de proyectos.
+3. Instala dependencias de Laravel:
+    ```bash
+    cd Back/fact-back
+    composer install
+    ```
+4. Copia el archivo de entorno:
+    ```bash
+    cp .env.example .env
+    ```
+5. Configura la conexión a la base de datos en `.env` (usualmente MySQL de XAMPP).
+6. Genera la clave de la app:
+    ```bash
+    php artisan key:generate
+    ```
+7. Ejecuta migraciones y seeders:
+    ```bash
+    php artisan migrate --seed
+    ```
+8. Inicia el servidor de Laravel:
+    ```bash
+    php artisan serve
+    ```
+9. Accede a la API en [http://localhost:8000/](http://localhost:8000/)
 
-```bash
-ng generate --help
-```
+### En Mac OS (comandos o XAMPP)
 
-## Building
+1. Instala PHP y Composer (puedes usar Homebrew):
+    ```bash
+    brew install php composer
+    ```
+2. (Opcional) Instala XAMPP y usa MySQL de XAMPP.
+3. Instala dependencias de Laravel:
+    ```bash
+    cd Back/fact-back
+    composer install
+    ```
+4. Copia el archivo de entorno:
+    ```bash
+    cp .env.example .env
+    ```
+5. Configura la conexión a la base de datos en `.env` (MySQL local o XAMPP).
+6. Genera la clave de la app:
+    ```bash
+    php artisan key:generate
+    ```
+7. Ejecuta migraciones y seeders:
+    ```bash
+    php artisan migrate --seed
+    ```
+8. Inicia el servidor de Laravel:
+    ```bash
+    php artisan serve
+    ```
+9. Accede a la API en [http://localhost:8000/](http://localhost:8000/)
 
-To build the project run:
+## Notas adicionales
 
-```bash
-ng build
-```
+-   Si usas XAMPP, asegúrate de que el puerto de MySQL y Apache no estén ocupados.
+-   Puedes modificar la configuración de la base de datos en el archivo `.env`.
+-   Para ejecutar pruebas en el backend:
+    ```bash
+    php artisan test
+    ```
+-   Para ejecutar pruebas en el frontend:
+    ```bash
+    ng test
+    ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Recursos útiles
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+-   [Documentación Angular CLI](https://angular.dev/tools/cli)
+-   [Documentación Laravel](https://laravel.com/docs)
