@@ -1,1 +1,123 @@
-<p>facts-page works!</p>
+<app-form-clients
+    [(visible)]="newFact"
+    [title]="fact ? 'Edit Fact' : 'New Fact'"
+    [client]="fact"
+    (getAllClients)="getAllFacts()"
+></app-form-clients>
+<div class="grid">
+    <div class="col-3 w-full" [align]="'left'">
+        <app-card-new
+            title="New Fact"
+            description="Create a new fact"
+            buttonLabel="New Fact"
+            icon="pi pi-plus"
+            (handleNew)="handleNewFact()"
+        ></app-card-new>
+    </div>
+</div>
+
+<div class="grid mt-2">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="grid">
+                    <div class="col-12">
+                        <p-table
+                            class="table table-flush"
+                            #dt2
+                            [value]="facts"
+                            dataKey="id"
+                            [rows]="10"
+                            [rowsPerPageOptions]="[10, 25, 50]"
+                            [paginator]="true"
+                            [globalFilterFields]="[
+                                'identification',
+                                'names',
+                                'contact-info'
+                            ]"
+                            [tableStyle]="{ 'min-width': '75rem' }"
+                        >
+                            <ng-template #caption>
+                                <div class="flex">
+                                    <p-iconfield
+                                        iconPosition="left"
+                                        class="ml-auto"
+                                    >
+                                        <p-inputicon>
+                                            <i class="pi pi-search"></i>
+                                        </p-inputicon>
+                                        <input
+                                            pInputText
+                                            type="text"
+                                            (input)="
+                                                dt2.filterGlobal(
+                                                    $event.target.value,
+                                                    'contains'
+                                                )
+                                            "
+                                            placeholder="Search keyword"
+                                        />
+                                    </p-iconfield>
+                                </div>
+                            </ng-template>
+                            <ng-template #header>
+                                <tr>
+                                    <th style="width: 20%">ID</th>
+                                    <th style="width: 30%">Date</th>
+                                    <th style="width: 30%">Total</th>
+                                    <th style="width: 20%"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template #body let-fact>
+                                <tr>
+                                    <td>
+                                        {{ fact.id }}
+                                    </td>
+                                    <td>
+                                        <div class="flex items-center gap-2">
+                                            <span>{{
+                                                fact.date | date : "medium"
+                                            }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex items-center gap-2">
+                                            <div>
+                                                <i class="pi pi-dollar"></i>
+                                                {{ fact.total }}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button
+                                            class="btn btn-icon btn-sm btn-danger"
+                                            type="button"
+                                            (click)="handleDeleteFact(fact)"
+                                        >
+                                            <span class="btn-inner--icon"
+                                                ><i class="pi pi-trash"></i
+                                            ></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template #emptymessage>
+                                <tr>
+                                    <td colspan="5">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-dialog-delete-confirm
+    [(visible)]="deleteFact"
+    [message]="'Are you sure you want to delete this fact?'"
+    [cancelText]="'Cancel'"
+    [confirmText]="'Delete'"
+    title="Delete Fact"
+    (confirmed)="confirmDelete()"
+></app-dialog-delete-confirm>
